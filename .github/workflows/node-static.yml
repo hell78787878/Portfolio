@@ -68,6 +68,8 @@ jobs:
           echo "command=$BUILD_COMMAND" >> "$GITHUB_OUTPUT"
 
       - name: Build static site
+        env:
+          CI: "false"
         run: ${{ steps.build-command.outputs.command }}
 
       - name: Resolve artifact path
