@@ -45,7 +45,12 @@ jobs:
       - name: Install dependencies
         run: |
           if [ -f package-lock.json ]; then
-            npm ci
+            if npm ci; then
+              echo "Dependencies installed with npm ci."
+            else
+              echo "npm ci failed, likely due to an out-of-sync lockfile. Falling back to npm install."
+              npm install
+            fi
           else
             npm install
           fi
